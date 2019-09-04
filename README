@@ -1,0 +1,8 @@
+Start a 3.11 (or 3.[something]) Playground Scenario from here:
+https://learn.openshift.com/playgrounds/
+
+Initial Openshift Setup:
+./scripts/setup.sh
+
+Build and deploy your project
+./scripts/deploy.sh
