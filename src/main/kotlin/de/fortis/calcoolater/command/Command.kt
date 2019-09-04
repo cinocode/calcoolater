@@ -27,3 +27,17 @@ class Addition : Command {
     }
 }
 
+class Subtraction : Command {
+
+    override fun conditionMet(input: String) = input.contains("-")
+
+    override fun processInput(input: String) : String {
+        val parts = input.dropWhitespace().split("-")
+        var diff = Integer.valueOf(parts[0])
+        parts.subList(1, parts.size).forEach {
+            diff -= Integer.valueOf(it)
+        }
+        return "Diff is: $diff"
+    }
+}
+

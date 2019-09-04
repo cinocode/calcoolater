@@ -13,7 +13,7 @@ private val log = KotlinLogging.logger {}
 @RequestMapping
 class CommandController {
 
-    val commands = listOf(Greeting(), Addition())
+    val commands = listOf(Greeting(), Addition(), Subtraction())
 
     @PostMapping
     fun doStuff(@RequestBody request: Request): Reply {
