@@ -1,11 +1,11 @@
 package de.fortis.calcoolater;
 
 import mu.KotlinLogging
-import java.net.InetAddress;
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import java.net.InetAddress
 
 private val log = KotlinLogging.logger {}
 
@@ -19,10 +19,9 @@ class CmdController {
         var ret = ""
         if (request.cmd.toLowerCase().startsWith("my name is")) {
             ret = "Hey " + request.cmd.substring(11)
-        } else if (request.cmd.contains(" + ")) {
-            val parts = request.cmd.split(" + ");
+        } else if (request.cmd.contains("+")) {
             var sum = 0
-            parts.forEach {
+            request.cmd.dropWhitespace().split("+").forEach {
                 sum += Integer.valueOf(it)
             }
             ret = "Sum is: $sum"
@@ -37,6 +36,8 @@ class CmdController {
 
     fun whoami() = InetAddress.getLocalHost().getHostName();
 }
+
+fun String.dropWhitespace() = this.replace(" ", "")
 
 data class Request(
     val cmd: String
