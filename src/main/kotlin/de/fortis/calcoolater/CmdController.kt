@@ -1,9 +1,12 @@
 package de.fortis.calcoolater;
 
+import mu.KotlinLogging
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+
+private val log = KotlinLogging.logger {}
 
 @RestController
 @RequestMapping
@@ -11,6 +14,7 @@ class CmdController {
 
     @PostMapping
     fun doStuff(@RequestBody request: StringHolder): StringHolder {
+        log.info("processing '${request.cmd}'")
         var ret = ""
         if (request.cmd.toLowerCase().startsWith("my name is")) {
             ret = "Hey " + request.cmd.substring(11)
@@ -24,6 +28,9 @@ class CmdController {
         } else {
             ret = "Unknown input"
         }
+
+        log.info("processed '${request.cmd}' - returning '${ret}'")
+
         return StringHolder(ret)
     }
 }
